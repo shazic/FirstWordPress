@@ -78,7 +78,16 @@ $table_prefix  = 'wp_';
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
 define('WP_DEBUG', false);
-
+//<Shashank-BEGIN:2016-11-10:Modifying to allow Multisite>
+define('WP_ALLOW_MULTISITE', true);
+define('MULTISITE', true);
+define('SUBDOMAIN_INSTALL', false);
+define('DOMAIN_CURRENT_SITE', '127.0.0.1');
+define('PATH_CURRENT_SITE', '/FWP/FirstWordPress/');
+define('SITE_ID_CURRENT_SITE', 1);
+define('BLOG_ID_CURRENT_SITE', 1);
+define('FS_METHOD', 'direct');
+//<Shashank-END:2016-11-10:Modifying to allow Multisite>
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
