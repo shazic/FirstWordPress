@@ -71,13 +71,7 @@
         <?php } ?>
         <div class="clearfix"></div>
         <?php
-		//<Shashank-BEGIN:2016-11-08:Modifying footer to remove default footer text>
-		//<Shashank-BEGIN:2016-11-09:Corretion footer to remove default footer text>
-        //$footer_content = evolve_get_option('evl_footer_content', '<p id=\'copyright\'><span class=\'credits\'><a href=\'http://theme4press.com/evolve-multipurpose-wordpress-theme/\'>evolve</a> theme by Theme4Press&nbsp;&nbsp;&bull;&nbsp;&nbsp;Powered by <a href=\'http://wordpress.org\'>WordPress</a></span></p>');
-		$footer_content = 
-				'<p id=\'copyright\'><span class=\'credits\'><a href=\'http://theme4press.com/evolve-multipurpose-wordpress-theme/\'>evolve</a>theme by Theme4Press&nbsp;&nbsp;&bull;&nbsp;&nbsp;Powered by \'Ninja Power\'</span></p>';
-		//<Shashank-END:2016-11-09>
-		//<Shashank-END:2016-11-08>
+		$footer_content = evolve_get_option('evl_footer_content', '<p id=\'copyright\'><span class=\'credits\'><a href=\'http://theme4press.com/evolve-multipurpose-wordpress-theme/\'>evolve</a> theme by Theme4Press&nbsp;&nbsp;&bull;&nbsp;&nbsp;Powered by <a href=\'http://wordpress.org\'>WordPress</a></span></p>');
 		
         if ($footer_content === false)
             $footer_content = '';
