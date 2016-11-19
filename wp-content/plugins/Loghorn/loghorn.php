@@ -3,7 +3,7 @@
    Plugin Name: Log Horn
    Plugin URI: http://localhost
    Description: a plugin to customize the login experience in WordPress.
-   Version: 1.0
+   Version: 1.1
    Author: shazic
    Author URI: https://github.com/shazic
    License: GPL3
@@ -20,7 +20,8 @@ if (!class_exists('LogHorn')) :
 		private static $loghorn_member;				// a dummy member - for use in future versions.
 		private $loghorn_OS, 						// stores info whether the Operating System is 'Windows' or 'NonWindows'.
 				$loghorn_dir_separator;				// stores the Directory Separator - backslash for 'Windows', forward-slash for 'NonWindows'.
-		public $loghorn_version='v1.0';
+		private static $loghorn_custom_logo;		// stores the name of the logo file (after reading from the database).
+		public $loghorn_version='v1.1';
 		
 		//Constructor: All initializations occur here.
 		function LogHorn()	{
@@ -63,7 +64,7 @@ if (!class_exists('LogHorn')) :
 
             // Set the directory path:
             if (!defined( 'LOGHORN_DIR')) {
-                define('LOGHORN_DIR', plugin_dir_path(LOGHORN_FILE));
+				define('LOGHORN_DIR', __DIR__.DIRECTORY_SEPARATOR);
             }
 
             // Set the plugin folder's URL:
@@ -83,7 +84,7 @@ if (!class_exists('LogHorn')) :
 			
             // Set the CSS directory name:
             if (!defined('LOGHORN_CSS_DIRNAME')) {
-                define('LOGHORN_CSS_DIRNAME', LOGHORN_DIRNAME.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR);
+                define('LOGHORN_CSS_DIRNAME', LOGHORN_DIR.'css'.DIRECTORY_SEPARATOR);	//For future use.
             }
 			
             // Set the image URL:
@@ -91,16 +92,9 @@ if (!class_exists('LogHorn')) :
                 define('LOGHORN_IMAGES_URL',LOGHORN_URL.'images/');
 			}
 			
-			/* Debug info:
-			echo "LOGHORN_VERSION=".LOGHORN_VERSION."<br/>";
-			echo "LOGHORN_FILE=".LOGHORN_FILE."<br/>";
-			echo "LOGHORN_DIR=".LOGHORN_DIR."<br/>";
-			echo "LOGHORN_URL=".LOGHORN_URL."<br/>";
-			echo "LOGHORN_BASENAME=".LOGHORN_BASENAME."<br/>";
-			echo "LOGHORN_DIRNAME=".LOGHORN_DIRNAME."<br/>";
-			echo "LOGHORN_IMAGES_URL=".LOGHORN_IMAGES_URL."<br/>";
-			echo "LOGHORN_CSS_DIRNAME=".LOGHORN_CSS_DIRNAME."<br/>";
-			*/
+			// Debug info:
+			//$this->loghorn_debug_info();
+			
 		}
 		
 		/** 
@@ -108,17 +102,23 @@ if (!class_exists('LogHorn')) :
 		 */
 		function loghorn_login_scripts()	{
 	
-			$loghorn_logo_file 	= $this->loghorn_get_login_logo('default_logo_blue_80x80.png');					// name of the image file to be used as the logo.
-			$loghorn_css 		= $this->loghorn_get_css('loghorn_enqueue_script');	// any additional stylesheets to manipulate the login logo
+			$loghorn_logo_file 	= $this->loghorn_get_login_logo('default_logo_blue_80x80.png');	// name of the image file to be used as the logo.
+			$loghorn_css 		= $this->loghorn_get_css('loghorn_enqueue_script');	// any additional stylesheets to manipulate the login logo (future use)
+			//echo LOGHORN_IMAGES_URL.$loghorn_logo_file;
 			?>
 			
 			<!-- The CSS included in the below code replaces the WordPress logo with the custom image. -->
-			<style type="text/css">
-				#login h1 a, .login h1 a{
-					background-image: url(<?php echo LOGHORN_IMAGES_URL.$loghorn_logo_file; ?>);
-					padding-bottom: 30px;
-				}
-			</style>
+			<style type="text/css" >
+						#login h1 a, .login h1 a{
+							background-image: url(<?php echo LOGHORN_IMAGES_URL.$loghorn_logo_file?>);
+							padding-bottom: 30px;
+						}
+			
+			<!-- For future use:
+						<link rel="stylesheet" type="text/css" href=<?php echo "$loghorn_css"; ?> >
+			-->
+			</style> 
+			
 			<?php 
 		}
 		
@@ -128,24 +128,47 @@ if (!class_exists('LogHorn')) :
 		 */
 		function loghorn_get_login_logo($loghorn_default_logo='default_logo_80x80.png')	{
 	
-			global $loghorn_custom_logo ;
-	
-			if (isset ($loghorn_custom_logo))
-				if (file_exists(LOGHORN_IMAGES_URL.$loghorn_custom_logo))
-					return $loghorn_custom_logo;
-	
+			$this->loghorn_fetch_custom_logo();
+			
+			if (isset (self::$loghorn_custom_logo))
+				if (file_exists(LOGHORN_DIR.'images'.DIRECTORY_SEPARATOR.self::$loghorn_custom_logo))
+					return self::$loghorn_custom_logo;
 			return $loghorn_default_logo;
 		}
-
+		
+		/**
+		 * Query the database for the logo filename. 
+		 */
+		function loghorn_fetch_custom_logo()	{
+			
+			//fetch the database to get the logo filename as set by the user and return the result
+			
+			self::$loghorn_custom_logo='default_logo_green_80x80.png';
+						
+			return self::$loghorn_custom_logo;
+		}
 		/**
 		 * Get the URL of the CSS library.
 		 */
 		function loghorn_get_css($loghorn_current_script)	{
-			// Debug info:
-			echo 'CSS dir: '.LOGHORN_CSS_DIRNAME.$loghorn_current_script.'.css';
-			return LOGHORN_CSS_DIRNAME.$loghorn_current_script.'.css';
+			return LOGHORN_CSS_DIRNAME.$loghorn_current_script.'.css';	// Currently no external CSS used. Placeholder for future use.
 		}
-		
+		/**
+		 * The function is used for debug purpose and would be removed in the final deployment.
+		 */
+		function loghorn_debug_info()	{
+			
+			// Debug info:
+			echo "LOGHORN_VERSION=".LOGHORN_VERSION."<br/>";
+			echo "LOGHORN_FILE=".LOGHORN_FILE."<br/>";
+			echo "LOGHORN_DIR=".LOGHORN_DIR."<br/>";
+			echo "LOGHORN_URL=".LOGHORN_URL."<br/>";
+			echo "LOGHORN_BASENAME=".LOGHORN_BASENAME."<br/>";
+			echo "LOGHORN_DIRNAME=".LOGHORN_DIRNAME."<br/>";
+			echo "LOGHORN_IMAGES_URL=".LOGHORN_IMAGES_URL."<br/>";
+			echo "LOGHORN_CSS_DIRNAME=".LOGHORN_CSS_DIRNAME."<br/>";
+						
+		}
 	} //class LogHorn ends here.
 	
 	/**
