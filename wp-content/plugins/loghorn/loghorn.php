@@ -3,7 +3,7 @@
    Plugin Name: Log Horn
    Plugin URI: http://localhost
    Description: a plugin to customize the login experience in WordPress.
-   Version: 0.2
+   Version: 0.3
    Author: shazic
    Author URI: https://github.com/shazic
    License: GPLv3
@@ -16,8 +16,14 @@
  */ 
 	defined( 'ABSPATH' ) or die ;
    
-	
+	// Initialize all constants.
 	require_once __DIR__.DIRECTORY_SEPARATOR.'initialize-loghorn.php' ;
 	
-	require_once LOGHORN_DIR.'includes/class-log-horn-display.php' ;
+	// Display the custom login page (if set) irrespective of user authority (since user is not logged in yet)
+	require_once LOGHORN_INCLUDES_DIRNAME.'class-log-horn-display.php' ;	
+	
+	// Set up Admin Menu if the user has network admin authority.
+	if ( is_admin() )  {
+		require_once LOGHORN_INCLUDES_DIRNAME.'class-log-horn-admin-menu.php' ;
+	}
 ?>

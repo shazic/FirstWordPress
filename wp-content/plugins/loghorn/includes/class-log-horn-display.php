@@ -119,7 +119,7 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			#'Bull_GraphicMama_team_80x80.png'				// Debug info
 			#'gnu_80x801.png'	//Default					// Debug info
 			;
-			
+			echo self::$loghorn_custom_logo;
 		}
 		
 		/**
