@@ -30,9 +30,13 @@ if  ( ! class_exists ( 'Log_Horn_Admin_Menu' )  )  :
 			/**
 			 * Latch on to action hooks here.
 			 */
-			 
-			add_action( 'network_admin_menu', array ( $this,'loghorn_menu' ) ) ;
-			//echo "..................................................loghorn menu constructor" ;
+			if ( is_multisite() ) {		
+				add_action( 'network_admin_menu', 	array ( $this,'loghorn_menu' ) ) ;
+			}
+			else	{
+				add_action( 'admin_menu', 			array ( $this,'loghorn_menu' ) ) ;
+			}
+			
 		}
 		
 		/**
@@ -40,15 +44,16 @@ if  ( ! class_exists ( 'Log_Horn_Admin_Menu' )  )  :
 		 */
 		function loghorn_menu() {
 			
-			if ( is_super_admin () )
-				add_menu_page ( 
+			if ( is_super_admin () )	{
+						add_menu_page ( 
 								'Log Horn', 								// page title
 								'Log Horn settings', 						// menu title
 								'manage_options', 							// capability
 								'class-log-horn-admin-menu.php', 			// menu-slug
 								array ( $this, 'loghorn_plugin_options' ), 	// function
 								'dashicons-layout'							// icon (used WordPress dashicons)
-				);
+						);
+			}
 		}
 		
 		function loghorn_plugin_options ()	{

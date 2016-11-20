@@ -24,7 +24,8 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 		 * Naming standard: All member and method names used in the plugin begin with the prefix '$loghorn_' 
 		 */
 		
-		private static $loghorn_custom_logo ;		// stores the name of the logo file  ( after reading from the options table ) .
+		private static 	$loghorn_custom_logo ,		// stores the name of the logo file  ( after reading from the options table ) .
+						$loghorn_custom_background;	// stores the name of the background file  ( after reading from the options table ) .	
 		
 		private $loghorn_OS , 						// stores info whether the Operating System is 'Windows' or 'NonWindows'.
 				$loghorn_dir_separator ;			// stores the Directory Separator - backslash for 'Windows', forward-slash for 'NonWindows'.
@@ -63,6 +64,7 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 		function loghorn_login_scripts () 	{
 	
 			$loghorn_logo_file 	= $this->loghorn_get_login_logo ( 'Bull_GraphicMama_team_80x80.png' ) ;	// name of the image file to be used as the logo.
+			$loghorn_bg_file 	= $this->loghorn_get_login_bg   ( 'sunrise.jpg' ) ;	// name of the image file to be used as the background.
 			
 			$loghorn_css 		= $this->loghorn_get_css ( 'loghorn_enqueue_script' ) ;	// any additional stylesheets to manipulate the login logo  ( future use ) 
 			
@@ -75,7 +77,12 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 							background-image: url(<?php echo esc_url(LOGHORN_IMAGES_URL.$loghorn_logo_file) ; ?>);
 							padding-bottom: 30px;
 						}
-			
+						body.login {
+							background-image: url(<?php echo esc_url(LOGHORN_IMAGES_URL.'sunrise.jpg') ; ?>);
+							background-repeat: no-repeat;
+							background-attachment: fixed;
+							background-position: center;
+						}
 			<!-- For future use:
 						<link rel="stylesheet" type="text/css" href=<?php echo "$loghorn_css"; ?> >
 			-->
@@ -119,7 +126,46 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			#'Bull_GraphicMama_team_80x80.png'				// Debug info
 			#'gnu_80x801.png'	//Default					// Debug info
 			;
-			echo self::$loghorn_custom_logo;
+			// echo "loghorn_custom_logo: ".self::$loghorn_custom_logo ; // debug info
+		}
+		
+		/**
+		 * Get the name of the image that would be set as background during login. 
+		 * This should be present in the plugin's images directory.
+		 */
+		function loghorn_get_login_bg($loghorn_default_bg=LOGHORN_DEFAULT_BG_IMAGE ) 	{
+	
+			$this->loghorn_fetch_custom_bg (  ) ;	// Fetch the name of the file from the database.
+			
+			// Check if the options table returned a valid filename: 
+			if  ( isset  ( self::$loghorn_custom_background ) && self::$loghorn_custom_background )
+				// options table returned a valid name. Now, check if the file exists under the /images directory:
+				if  ( file_exists ( LOGHORN_IMAGES_DIRNAME.self::$loghorn_custom_background )  ) 
+					return self::$loghorn_custom_background ;
+			
+			// We are here because we didn't get a valid filename from the database. 
+			// Either the user did not set it, or the file no longer exists.
+			// Let's check if the default filenames are present.
+			if  ( file_exists ( LOGHORN_IMAGES_DIRNAME.$loghorn_default_bg )  ) 
+				return $loghorn_default_bg ;	// Return the default supplied by the user during function call.
+			else 
+				return LOGHORN_DEFAULT_BG_IMAGE ;	// Return the default image supplied by the plugin.
+		}
+		
+		/**
+		 * Query the database for the logo filename. 
+		 */
+		function loghorn_fetch_custom_bg () 	{
+			
+			//fetch the database to get the logo filename as set by the user and return the result
+			
+			self::$loghorn_custom_background=
+			get_option('loghorn_custom_background')
+			#'OPEN_Up_logo_green_180x80.png'				// Debug info
+			#'Bull_GraphicMama_team_80x80.png'				// Debug info
+			#'gnu_80x801.png'	//Default					// Debug info
+			;
+			// echo "loghorn_custom_background: ".self::$loghorn_custom_background ; // debug info
 		}
 		
 		/**

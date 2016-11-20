@@ -67,9 +67,12 @@
     }
 	
 	/***********************************  PLUGIN DEFAULTS  **************************************/
-	// Set the image URL:
+	// Set the logo image URL:
     if  ( ! defined ( 'LOGHORN_DEFAULT_LOGO_IMAGE' )  )  {
         define ( 'LOGHORN_DEFAULT_LOGO_IMAGE' , 'gnu_80x80.png' ) ;
 	}
-
+	// Set the background image URL:
+    if  ( ! defined ( 'LOGHORN_DEFAULT_BG_IMAGE' )  )  {
+        define ( 'LOGHORN_DEFAULT_BG_IMAGE' , 'sunrise.jpg' ) ;
+	}
 ?>
