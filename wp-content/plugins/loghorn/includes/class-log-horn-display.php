@@ -63,30 +63,36 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 		 */
 		function loghorn_login_scripts () 	{
 	
-			$loghorn_logo_file 	= $this->loghorn_get_login_logo ( 'Bull_GraphicMama_team_80x80.png' ) ;	// name of the image file to be used as the logo.
+			$loghorn_logo_file 	= $this->loghorn_get_login_logo (  ) ;	// name of the image file to be used as the logo.
 			$loghorn_bg_file 	= $this->loghorn_get_login_bg   ( 'sunrise.jpg' ) ;	// name of the image file to be used as the background.
 			
 			$loghorn_css 		= $this->loghorn_get_css ( 'loghorn_enqueue_script' ) ;	// any additional stylesheets to manipulate the login logo  ( future use ) 
-			
 			?>
 			
-			<!-- The CSS included in the below code replaces the WordPress logo with the custom image. -->
+			<!-- Static CSS stylesheets: for future use: -->
+			<link rel='stylesheet' type='text/css' href=<?php echo "'$loghorn_css'"; ?> >
+			
+			<!-- Dyanamic CSS stylesheets: -->
 			<style type="text/css" >
+						/** 
+						 * user logo goes here:
+						 */
 						#login h1 a, 
 						.login h1 a{
 							background-image: url(<?php echo esc_url(LOGHORN_IMAGES_URL.$loghorn_logo_file) ; ?>);
 							padding-bottom: 30px;
 						}
+						/** 
+						 * background image goes here:
+						*/ 
 						body.login {
-							background-image: url(<?php echo esc_url(LOGHORN_IMAGES_URL.'sunrise.jpg') ; ?>);
+							background-image: url(<?php echo esc_url(LOGHORN_IMAGES_URL.'GNU_charmer_1820x980.png') ; ?>) ;
 							background-repeat: no-repeat;
 							background-attachment: fixed;
 							background-position: center;
-						}
-			<!-- For future use:
-						<link rel="stylesheet" type="text/css" href=<?php echo "$loghorn_css"; ?> >
-			-->
-			</style> 
+						} 
+						
+			</style>
 			
 			<?php 
 		}
@@ -95,7 +101,7 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 		 * Get the name of the image that would replace the WordPress Login logo. 
 		 * This should be present in the plugin's images directory.
 		 */
-		function loghorn_get_login_logo ( $loghorn_default_logo=LOGHORN_DEFAULT_LOGO_IMAGE ) 	{
+		function loghorn_get_login_logo ( $loghorn_default_logo = false ) 	{
 	
 			$this->loghorn_fetch_custom_logo (  ) ;	// Fetch the name of the file from the database.
 			
@@ -110,7 +116,7 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			if  ( file_exists ( LOGHORN_IMAGES_DIRNAME.$loghorn_default_logo )  ) 
 				return $loghorn_default_logo ;	// Return the default supplied by the user during function call.
 			else 
-				return LOGHORN_DEFAULT_LOGO_IMAGE ;	// Return the default image supplied by the plugin.
+				return false ;	// Return the default image supplied by the plugin.
 		}
 		
 		/**
@@ -121,10 +127,10 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			//fetch the database to get the logo filename as set by the user and return the result
 			
 			self::$loghorn_custom_logo=
-			get_option('loghorn_custom_logo')
+			get_option('loghorn_custom_logo' )
 			#'OPEN_Up_logo_green_180x80.png'				// Debug info
 			#'Bull_GraphicMama_team_80x80.png'				// Debug info
-			#'gnu_80x801.png'	//Default					// Debug info
+			#'gnu_80x80.png'	//Default					// Debug info
 			;
 			// echo "loghorn_custom_logo: ".self::$loghorn_custom_logo ; // debug info
 		}
@@ -133,7 +139,7 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 		 * Get the name of the image that would be set as background during login. 
 		 * This should be present in the plugin's images directory.
 		 */
-		function loghorn_get_login_bg($loghorn_default_bg=LOGHORN_DEFAULT_BG_IMAGE ) 	{
+		function loghorn_get_login_bg($loghorn_default_bg = LOGHORN_DEFAULT_BG_IMAGE ) 	{
 	
 			$this->loghorn_fetch_custom_bg (  ) ;	// Fetch the name of the file from the database.
 			
@@ -161,9 +167,6 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			
 			self::$loghorn_custom_background=
 			get_option('loghorn_custom_background')
-			#'OPEN_Up_logo_green_180x80.png'				// Debug info
-			#'Bull_GraphicMama_team_80x80.png'				// Debug info
-			#'gnu_80x801.png'	//Default					// Debug info
 			;
 			// echo "loghorn_custom_background: ".self::$loghorn_custom_background ; // debug info
 		}
@@ -172,7 +175,7 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 		 * Get the URL of the CSS library.
 		 */
 		function loghorn_get_css ( $loghorn_current_script ) 	{
-			return LOGHORN_CSS_DIRNAME.$loghorn_current_script.'.css' ;	// Currently no external CSS used. Placeholder for future use.
+			return LOGHORN_CSS_URL.$loghorn_current_script.'.css' ;	// Currently no external CSS used. Placeholder for future use.
 		}
 		
 	} //class Log_Horn_Display ends here.

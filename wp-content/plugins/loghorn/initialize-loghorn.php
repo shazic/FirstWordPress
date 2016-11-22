@@ -35,6 +35,12 @@
     if  ( ! defined ( 'LOGHORN_IMAGES_URL' )  )  {
         define ( 'LOGHORN_IMAGES_URL' , LOGHORN_URL.'images/' ) ;
 	}
+	
+	// Set the CSS URL:
+    if  ( ! defined ( 'LOGHORN_CSS_URL' )  )  {
+        define ( 'LOGHORN_CSS_URL' , LOGHORN_URL.'css/' ) ;	//For future use.
+    }
+	
 	/***********************************      BASENAMES    **************************************/
     // Set the basename:
     if  ( ! defined ( 'LOGHORN_BASENAME' )  )  {
@@ -60,12 +66,7 @@
     if  ( ! defined ( 'LOGHORN_IMAGES_DIRNAME' )  )  {
         define ( 'LOGHORN_IMAGES_DIRNAME' , LOGHORN_DIR.'images'.DIRECTORY_SEPARATOR ) ;	
     }
-	
-	// Set the CSS directory name:
-    if  ( ! defined ( 'LOGHORN_CSS_DIRNAME' )  )  {
-        define ( 'LOGHORN_CSS_DIRNAME' , LOGHORN_DIR.'css'.DIRECTORY_SEPARATOR ) ;	//For future use.
-    }
-	
+		
 	/***********************************  PLUGIN DEFAULTS  **************************************/
 	// Set the logo image URL:
     if  ( ! defined ( 'LOGHORN_DEFAULT_LOGO_IMAGE' )  )  {
