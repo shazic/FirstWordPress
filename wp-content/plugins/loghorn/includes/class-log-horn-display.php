@@ -127,10 +127,10 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			//fetch the database to get the logo filename as set by the user and return the result
 			
 			self::$loghorn_custom_logo=
-			get_option('loghorn_custom_logo' )
+			#get_option('loghorn_custom_logo' )
 			#'OPEN_Up_logo_green_180x80.png'				// Debug info
 			#'Bull_GraphicMama_team_80x80.png'				// Debug info
-			#'gnu_80x80.png'	//Default					// Debug info
+			'gnu_80x80.png'	//Default					// Debug info
 			;
 			// echo "loghorn_custom_logo: ".self::$loghorn_custom_logo ; // debug info
 		}

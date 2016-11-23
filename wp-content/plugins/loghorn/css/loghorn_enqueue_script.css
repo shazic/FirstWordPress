@@ -74,7 +74,9 @@
 		#user_login {
 			/** Login text-box: username */
 			color: #00aaff ;
+			font-size: 24px;
 			background: ff0000;
+			opacity: 1.0 ;
 		}
 		
 				
@@ -82,9 +84,29 @@
 			/** Login text-box: password */
 			color: #00aaff ;
 			background: ff0000;
+			opacity: 1.0 ;
+		}
+		
+		#rememberme {
+			/** Login check-box: Remember Me */
+			color: #00aaff ;
+			width: 12px;
+			height: 12px;
+			background: ff0000;
+			-webkit-border-radius: 2px;
+			border: 2px solid #0d9ed9;
+			opacity: 1.0 ;
 		}
 		
 		#loginform { 
+			opacity: 0.85 ; 
+			background: #0a080f ;
+			border: 2px solid #0f9ed9;
+			border-color:#0000ff;
+			-webkit-border-radius: 15px;
+		}
+		
+		#lostpasswordform	{ 
 			opacity: 0.85 ; 
 			background: #0a080f ;
 			border: 2px solid #0f9ed9;
