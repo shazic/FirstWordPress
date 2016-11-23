@@ -71,34 +71,15 @@
 			border: 1px solid #0d9ed9;
 		}
 		
-		#user_login {
-			/** Login text-box: username */
-			color: #00aaff ;
-			font-size: 24px;
-			background: ff0000;
-			opacity: 1.0 ;
-		}
-		
-				
-		#user_pass {
-			/** Login text-box: password */
-			color: #00aaff ;
-			background: ff0000;
-			opacity: 1.0 ;
-		}
-		
-		#rememberme {
-			/** Login check-box: Remember Me */
-			color: #00aaff ;
-			width: 12px;
-			height: 12px;
-			background: ff0000;
-			-webkit-border-radius: 2px;
-			border: 2px solid #0d9ed9;
-			opacity: 1.0 ;
+		#login {
+			width: 260px !important;
+			padding: 8% 0 0;
+			margin: auto;
+			/*opacity: 0.2;*/
 		}
 		
 		#loginform { 
+			/** The main login form */
 			opacity: 0.85 ; 
 			background: #0a080f ;
 			border: 2px solid #0f9ed9;
@@ -107,9 +88,50 @@
 		}
 		
 		#lostpasswordform	{ 
+			/** The forgot password form that asks for username*/
 			opacity: 0.85 ; 
 			background: #0a080f ;
 			border: 2px solid #0f9ed9;
 			border-color:#0000ff;
 			-webkit-border-radius: 15px;
 		}
+
+		#user_login {
+			/** Login text-box: username */
+			color: #00aaff ;
+			font-size: 24px;
+			background-color: #abc9fc;
+			opacity: 1.0 !important;
+		}
+		
+		#user_pass {
+			/** Login text-box: password */
+			color: #00aaff ;
+			background-color: #abc9fc;
+			opacity: 1.0 ;
+		}
+		
+		#rememberme {
+			/** Login check-box: Remember Me */
+			color: #00aaff ;
+			width: 12px;
+			height: 12px;
+			background-color: #abc9fc;
+			-webkit-border-radius: 2px;
+			border: 2px solid #0d9ed9;
+			opacity: 1.0 ;
+		}
+		
+		.login .message,
+		.login #login_error	{
+			background-color: #0a080f !important;
+			color: #005555;
+			text-shadow: none;
+			border-left: 5px solid #00a0d2;
+			border-right: 5px solid #00a0d2;
+			-webkit-border-radius: 15px;
+			opacity: 0.85;
+        }
+		.login #login_error {
+		border-color: #dc3232 ;
+		}		

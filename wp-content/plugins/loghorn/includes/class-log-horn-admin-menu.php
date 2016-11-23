@@ -37,7 +37,8 @@ if  ( ! class_exists ( 'Log_Horn_Admin_Menu' )  )  :
 				add_action( 'admin_menu', 			array ( $this , 'loghorn_menu' ) ) ;
 			}
 			add_action( 'admin_init', 				array ( $this , 'loghorn_plugin_settings' ) );
-		}
+			
+			}
 		
 		/**
 		 * The Menu-builder for Log Horn.

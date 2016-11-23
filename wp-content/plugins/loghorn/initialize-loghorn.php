@@ -9,7 +9,7 @@
  * Apply standard check - do not call this plugin from anywhere except the WordPress installation!
  */ 
 	defined( 'ABSPATH' ) or die ;
-   
+	
 	/**
      * Define constants that would be used in the plugin.
 	 * All constants are checked if they have been already defined or not before assigning them values. 
@@ -75,5 +75,14 @@
 	// Set the background image URL:
     if  ( ! defined ( 'LOGHORN_DEFAULT_BG_IMAGE' )  )  {
         define ( 'LOGHORN_DEFAULT_BG_IMAGE' , 'sunrise.jpg' ) ;
+	}
+	/**********************************  SETTINGS DEFAULTS  *************************************/
+	// Set the logo image URL:
+    if  ( ! defined ( 'LOGHORN_SETTINGS_LOGO' )  )  {
+        define ( 'LOGHORN_SETTINGS_LOGO' , 0 ) ;
+	}
+	// Set the background image URL:
+    if  ( ! defined ( 'LOGHORN_SETTINGS_BG' )  )  {
+        define ( 'LOGHORN_SETTINGS_BG' , 1 ) ;
 	}
 ?>
