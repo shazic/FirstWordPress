@@ -2,7 +2,7 @@
 
 /**
  * Class Name: Log_Horn_Display
- * This is the main class responsible for the display of the login page.
+ * This is the main class responsible for the display of the customized login page.
  */
  
 /**
@@ -29,6 +29,7 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 		private $loghorn_OS , 						// stores info whether the Operating System is 'Windows' or 'NonWindows'.
 				$loghorn_dir_separator ;			// stores the Directory Separator - backslash for 'Windows', forward-slash for 'NonWindows'.
 		
+		
 		/**
 		 * Constructor: All initializations occur here.
 		 */
@@ -36,42 +37,26 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			
 			$this->loghorn_detect_OS () ;			// Kept for future use.
 			
-			$this->loghorn_get_settings();
+			$this->loghorn_get_settings();			// Fetch settings from wp_options table.
 			
-			/****************************************************************
-			***********   Remove the below code
-			*****************************************************************/
-			if (!self::$loghorn_settings)	{
-				
-				extract( array	(
-											"self::$loghorn_settings[LOGHORN_SETTINGS_LOGO]"	=> "gnu_80x80.png",
-											"self::$loghorn_settings[LOGHORN_SETTINGS_BG]"		=> "GNU_charmer_1820x980.png"
-								)	
-						);
-			
-			}
-			/****************************************************************
-			***********   Remove the above code
-			*****************************************************************/
-						
 			/**
 			 * Latch on to action hooks here.
 			 */
 			add_action ( 'login_enqueue_scripts', array (  $this,'loghorn_login_scripts' )  ) ;
 		}
 		
+		
 		/**
 		 * Get the settings from the options table.
 		 */
-		 
 		function loghorn_get_settings()	{
 			
 			self::$loghorn_settings = 
-			#get_option('loghorn_settings')
-			explode (";", "gnu_80x80.png;GNU_charmer_1820x980.png")
+			#explode (";" , get_option('loghorn_settings') ) 
+			explode (";" , "gnu_80x80.png;GNU_charmer_1820x980.png")	// Debug info
 			;
-			print_r(self::$loghorn_settings);
 		}
+		
 		
 		/**
 		 * Detect if the OS is Windows based or Non-Windows based platform:
@@ -83,10 +68,12 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			} else {
 				$this->loghorn_OS='NonWindows' ;	$this->loghorn_dir_separator='/' ;
 			}
-			//Note: $loghorn_dir_separator is not used in the program. Instead, the constant DIRECTORY_SEPARATOR is used.
-			//		The function 'loghorn_detect_OS (  ) ' and the variables '$loghorn_OS' and '$loghorn_dir_separator' are only placeholders 
-			//		These variables/function could be used in future versions.
+			/* Note:	$loghorn_dir_separator is not used in the program. Instead, the constant DIRECTORY_SEPARATOR is used.
+			 *			The function 'loghorn_detect_OS (  ) ' and the variables '$loghorn_OS' and '$loghorn_dir_separator' are only placeholders 
+			 *			These variables/function could be used in future versions.
+			 */
 		}
+		
 		
 		/** 
 		 * This function hooks into WP using the 'login_enqueue_scripts' tag in order to manipulate the WordPress logo through CSS scripts:
@@ -99,7 +86,7 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			$loghorn_css 		= $this->loghorn_get_css ( 'loghorn_enqueue_script' ) ;	// any additional stylesheets to manipulate the login logo  ( future use ) 
 			?>
 			
-			<!-- Static CSS stylesheets: for future use: -->
+			<!-- Static CSS stylesheets: -->
 			<link rel='stylesheet' type='text/css' href=<?php echo "'$loghorn_css'"; ?> >
 			
 			<!-- Dyanamic CSS stylesheets: -->
@@ -127,13 +114,12 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			<?php 
 		}
 		
+		
 		/**
 		 * Get the name of the image that would replace the WordPress Login logo. 
 		 * This should be present in the plugin's images directory.
 		 */
-		function loghorn_get_login_logo ( $loghorn_default_logo = false ) 	{
-			
-			//global self::$loghorn_settings[LOGHORN_SETTINGS_LOGO];	// Globals declared at the start of the file.
+		function loghorn_get_login_logo ( $loghorn_default_logo = LOGHORN_DEFAULT_LOGO_IMAGE ) 	{
 			
 			// Check if the options table returned a valid filename: 
 			if  ( isset  ( self::$loghorn_settings[LOGHORN_SETTINGS_LOGO] ) && self::$loghorn_settings[LOGHORN_SETTINGS_LOGO] )
@@ -146,8 +132,9 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			if  ( file_exists ( LOGHORN_IMAGES_DIRNAME.$loghorn_default_logo )  ) 
 				return $loghorn_default_logo ;	// Return the default supplied by the user during function call.
 			else 
-				return false ;	// Return the default image supplied by the plugin.
+				return false ;	// Return false.
 		}
+		
 		
 		/**
 		 * Get the name of the image that would be set as background during login. 
@@ -167,17 +154,19 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			if  ( file_exists ( LOGHORN_IMAGES_DIRNAME.$loghorn_default_bg )  ) 
 				return $loghorn_default_bg ;	// Return the default supplied by the user during function call.
 			else 
-				return LOGHORN_DEFAULT_BG_IMAGE ;	// Return the default image supplied by the plugin.
+				return false ;	// Return the default image supplied by the plugin.
 		}
+		
 		
 		/**
 		 * Get the URL of the CSS library.
 		 */
 		function loghorn_get_css ( $loghorn_current_script ) 	{
-			return LOGHORN_CSS_URL.$loghorn_current_script.'.css' ;	// Currently no external CSS used. Placeholder for future use.
+			return LOGHORN_CSS_URL.$loghorn_current_script.'.css' ;	
 		}
 		
 	} //class Log_Horn_Display ends here.
+	
 	
 	/**
 	 * Instantiate an object of the class Log_Horn_Display to call the class constructor.
@@ -189,6 +178,7 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 	// Go ahead and trigger the plugin:
 	start_log_horn () ;
 	
-endif; // End of the 'if  ( class_exists ) ' block
+endif; 	// End of the 'if  ( class_exists ) ' block. 
+		// There is no 'else' defined - the plugin will quit quietly if the class is already defined elsewhere.
   
 ?>

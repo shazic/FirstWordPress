@@ -75,9 +75,8 @@
 			width: 260px !important;
 			padding: 8% 0 0;
 			margin: auto;
-			/*opacity: 0.2;*/
 		}
-		
+
 		#loginform { 
 			/** The main login form */
 			opacity: 0.85 ; 
@@ -124,6 +123,7 @@
 		
 		.login .message,
 		.login #login_error	{
+			/** Errors and messages */
 			background-color: #0a080f !important;
 			color: #005555;
 			text-shadow: none;
@@ -132,6 +132,13 @@
 			-webkit-border-radius: 15px;
 			opacity: 0.85;
         }
+		
 		.login #login_error {
+			/** Error message */
 		border-color: #dc3232 ;
-		}		
+		}
+		/*
+		.login form	{
+			background: #0a080f !important;
+			opacity: 0.85 ; 
+		}*/
