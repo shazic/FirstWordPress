@@ -83,12 +83,14 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			$loghorn_logo_file 	= $this->loghorn_get_login_logo (  ) ;	// name of the image file to be used as the logo.
 			$loghorn_bg_file 	= $this->loghorn_get_login_bg   (  ) ;	// name of the image file to be used as the background.
 			
-			$loghorn_css 		= $this->loghorn_get_css ( 'loghorn_enqueue_script' ) ;	// any additional stylesheets to manipulate the login logo  ( future use ) 
+			$loghorn_css 		= $this->loghorn_get_css ( 'loghorn_enqueue_script - gnu' ) ;	// any additional stylesheets to manipulate the login logo  ( future use ) 
 			?>
 			
 			<!-- Static CSS stylesheets: -->
+			<?php if (true) ?>
 			<link rel='stylesheet' type='text/css' href=<?php echo "'$loghorn_css'"; ?> >
 			
+			<?php if (false) {	?>
 			<!-- Dyanamic CSS stylesheets: -->
 			<style type="text/css" >
 						/** 
@@ -112,8 +114,8 @@ if  ( ! class_exists ( 'Log_Horn_Display' )  )  :
 			</style>
 			
 			<?php 
+			}
 		}
-		
 		
 		/**
 		 * Get the name of the image that would replace the WordPress Login logo. 

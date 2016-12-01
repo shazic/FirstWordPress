@@ -1,29 +1,78 @@
 		body.login {
-			/** Background Image: 
-			background-image: url('http://127.0.0.1/FWP/FirstWordPress/wp-content/plugins/loghorn/images/sunrise.jpg');
+			background-image: url('http://127.0.0.1/FWP/FirstWordPress/wp-content/plugins/loghorn/images/GNU_charmer_1820x980.png');
 			background-repeat: no-repeat;
 			background-attachment: fixed;
-			background-position: right;
-			/* opacity: 1.0 ; */
+			background-position: center;
 		}
 		
+		#login h1 a, 
+		.login h1 a{
+			/** User logo goes here:*/
+			background-image: url('http://127.0.0.1/FWP/FirstWordPress/wp-content/plugins/loghorn/images/gnu_80x80.png');
+			padding-bottom: 30px;
+		}
+
+		.login form	{
+			/** not used here */
+		}
+
+		#login {
+			width: 320px !important;
+			padding: 8% 0 0;
+			margin: auto;
+		}
+
+		#loginform { 
+			/** The main login form */
+			background-color: rgba( 0 , 0 , 0 , 0.0 ) ;
+			box-shadow: none;
+			}
+		
 		.login label {
+			/** Login form label goes here:*/	
 			font-size: 12px;
 			color: #555555;
 		}
 
 		.login input[type="text"]{
 			/** Username text-box: */
-			background-color: #ffffff;
-			border-color:#dddddd;
 			-webkit-border-radius: 10px; 
 		}
-
+		
+		#user_login {
+			/** Login text-box: username */
+			/** These values will override the one above sinc it is more specific */
+			font-size: 24px;
+		}
+		
 		.login input[type="password"]{
 			/** Password text-box: */
-			background-color: #ffffff;
-			border-color:#dddddd;
+			border-color:#dba608;
 			-webkit-border-radius: 10px; 
+		}
+		
+		#user_pass {
+			/** Login text-box: password */
+			/** These values will override the one above sinc it is more specific */
+		}
+		
+		#rememberme {
+			/** Login check-box: Remember Me */
+			width: 12px;
+			height: 12px;
+			-webkit-border-radius: 2px;
+			border: 2px solid #0d9ed9;
+			opacity: 1.0 ;
+		}
+		
+		#user_login ,
+		#user_pass ,
+		#rememberme	{
+			/** Input fields */
+			color: #dba608 ;
+			background-color: #fcfa71 ;
+			border-color:#dba608 ;
+			opacity: 0.85 ;
 		}
 		
 		.login .button-primary {
@@ -70,21 +119,7 @@
 			-webkit-border-radius: 4px;
 			border: 1px solid #0d9ed9;
 		}
-		
-		#login {
-			width: 260px !important;
-			padding: 8% 0 0;
-			margin: auto;
-		}
-
-		#loginform { 
-			/** The main login form */
-			background-color: rgba(10,10,10,0);
-			border: 2px solid #0f9ed9;
-			border-color:#0000ff;
-			-webkit-border-radius: 15px;
-		}
-		
+				
 		#lostpasswordform	{ 
 			/** The forgot password form that asks for username*/
 			opacity: 0.85 ; 
@@ -94,32 +129,6 @@
 			-webkit-border-radius: 15px;
 		}
 
-		#user_login {
-			/** Login text-box: username */
-			color: #00aaff ;
-			font-size: 24px;
-			background-color: #abc9fc;
-			opacity: 1.0 !important;
-		}
-		
-		#user_pass {
-			/** Login text-box: password */
-			color: #00aaff ;
-			background-color: #abc9fc;
-			opacity: 1.0 ;
-		}
-		
-		#rememberme {
-			/** Login check-box: Remember Me */
-			color: #00aaff ;
-			width: 12px;
-			height: 12px;
-			background-color: #abc9fc;
-			-webkit-border-radius: 2px;
-			border: 2px solid #0d9ed9;
-			opacity: 1.0 ;
-		}
-		
 		.login .message,
 		.login #login_error	{
 			/** Errors and messages */
@@ -136,7 +145,3 @@
 			/** Error message */
 		border-color: #dc3232 ;
 		}
-		/*
-		.login form	{
-			background-color: rgba(100,100,100,0.5);
-		}*/

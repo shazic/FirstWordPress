@@ -1,13 +1,19 @@
 		body.login {
-			/** Background Image: 
 			background-image: url('http://127.0.0.1/FWP/FirstWordPress/wp-content/plugins/loghorn/images/sunrise.jpg');
 			background-repeat: no-repeat;
 			background-attachment: fixed;
 			background-position: right;
-			/* opacity: 1.0 ; */
+		}
+		
+		#login h1 a, 
+		.login h1 a{
+			/** User logo goes here:*/
+			background-image: url('http://127.0.0.1/FWP/FirstWordPress/wp-content/plugins/loghorn/images/gnu_80x80.png');
+			padding-bottom: 30px;
 		}
 		
 		.login label {
+			/** Login form label goes here:*/	
 			font-size: 12px;
 			color: #555555;
 		}
@@ -18,7 +24,15 @@
 			border-color:#dddddd;
 			-webkit-border-radius: 10px; 
 		}
-
+		
+		#user_login {
+			/** Login text-box: username */
+			/** These values will override the one above sinc it is more specific */
+			color: #006ba0 ;
+			font-size: 24px;
+			background-color: #abc9fc;	
+		}
+		
 		.login input[type="password"]{
 			/** Password text-box: */
 			background-color: #ffffff;
@@ -26,6 +40,13 @@
 			-webkit-border-radius: 10px; 
 		}
 		
+		#user_pass {
+			/** Login text-box: password */
+			/** These values will override the one above sinc it is more specific */
+			color: #006ba0 ;
+			background-color: #abc9fc;	
+		}
+				
 		.login .button-primary {
 			/** Primary button: */
 			width: 130px;
@@ -72,14 +93,15 @@
 		}
 		
 		#login {
-			width: 260px !important;
+			width: 320px !important;
 			padding: 8% 0 0;
 			margin: auto;
 		}
 
 		#loginform { 
 			/** The main login form */
-			background-color: rgba(10,10,10,0);
+			opacity: 0.85 ;					/* All elements in the login form would have this value of opacity */
+			background: #0a080f ;
 			border: 2px solid #0f9ed9;
 			border-color:#0000ff;
 			-webkit-border-radius: 15px;
@@ -94,24 +116,9 @@
 			-webkit-border-radius: 15px;
 		}
 
-		#user_login {
-			/** Login text-box: username */
-			color: #00aaff ;
-			font-size: 24px;
-			background-color: #abc9fc;
-			opacity: 1.0 !important;
-		}
-		
-		#user_pass {
-			/** Login text-box: password */
-			color: #00aaff ;
-			background-color: #abc9fc;
-			opacity: 1.0 ;
-		}
-		
 		#rememberme {
 			/** Login check-box: Remember Me */
-			color: #00aaff ;
+			color: #006ba0 ;
 			width: 12px;
 			height: 12px;
 			background-color: #abc9fc;
@@ -138,5 +145,5 @@
 		}
 		/*
 		.login form	{
-			background-color: rgba(100,100,100,0.5);
+			/** not used here */
 		}*/
